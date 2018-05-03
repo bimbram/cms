@@ -1,0 +1,44 @@
+
+  <h1>Comments</h1>
+
+  <div class="col-sm-4">
+
+    <form action="/admin/categories/create" method="post">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" name="name" type="text" placeholder="Enter title"/>
+      </div>
+      <button class="btn btn-primary" type="submit">Create Category</button>
+    </form>
+  </div>
+  <hr/>
+  <br/>
+  <div class="col-sm-16">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Author</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each comments}}
+        <tr>
+          <td>{{id}}</td>
+          <td>{{user.firstName}} {{user.lastName}}</td>
+          <td>{{generateDate date 'MMMM, DD YYYY'}}</td>
+          <td><input data-id='{{id}}' type="checkbox" {{#if approvedComment}} checked {{/if}} name="approvedComment"/></td>
+          <td>
+            <form class="" action="/admin/comments/delete/{{id}}?_method=DELETE" method="post">
+              <button class="btn btn-danger">Delete</button>
+              <a class="btn btn-info" href="/admin/categories/edit/{{id}}">Edit</a>
+            </form>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>

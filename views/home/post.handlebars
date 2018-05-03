@@ -1,0 +1,100 @@
+<!-- Page Content -->
+<div class="container">
+
+  <div class="row">
+
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+
+      <!-- Title -->
+      <h1 class="mt-4">{{post.title}}</h1>
+
+      <!-- Author -->
+      <p class="lead">
+        by
+        <a href="#">{{post.user.firstName}} {{post.user.lastName}}</a>
+      </p>
+
+      <hr>
+
+      <!-- Date/Time -->
+      <p>Posted on {{generateDate post.date "MMMM, DD YYYY [at] HH:MM A"}}</p>
+
+      <hr>
+
+      <!-- Preview Image -->
+      <!-- http://placehold.it/900x300 -->
+      <img class="img-fluid rounded" src="/uploads/{{post.file}}" alt="">
+
+      <hr>
+
+      <!-- Post Content -->
+      {{post.body}}
+
+      <hr>
+
+      <!-- Comments Form -->
+      {{#if user}}
+      {{#if post.allowComments}}
+      <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+          <form action="/admin/comments" method="post">
+            <div class="form-group">
+              <textarea name="body" class="form-control" rows="3"></textarea>
+              <input type="hidden" name="postid" value="{{post.id}}" hidden/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      {{else}}
+      <br>
+      <hr>
+      <h4>Comments are not allowed for this post</h4>
+      <hr>
+      <br>
+      {{/if}}
+
+      {{else}}
+      <hr>
+      <h4>You ned to <a href="/login">login</a> to comment</h4>
+      <hr>
+      {{/if}}
+
+
+      <!-- Single Comment -->
+      {{#each post.comments}}
+      <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body">
+          <h5 class="mt-0">{{user.firstName}} {{user.lastName}}</h5>
+          {{body}}
+        </div>
+      </div>
+      {{/each}}
+
+    </div>
+    <!-- Sidebar Widgets Column -->
+    <div class="col-md-4">
+
+      <!-- Search Widget -->
+      {{> home/sidebar }}
+
+
+      <!-- Side Widget -->
+      <div class="card my-4">
+        <h5 class="card-header">Side Widget</h5>
+        <div class="card-body">
+          You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- /.row -->
+
+</div>
+<!-- /.container -->

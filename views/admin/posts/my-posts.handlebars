@@ -1,0 +1,42 @@
+<h1>All Post</h1>
+
+{{> admin/form-message }}
+
+<table class="table table-bordered">
+    <thead>
+      <tr class="text-center">
+        <th>Id</th>
+        <th>Author</th>
+        <th>Picture</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Allow Comments</th>
+        <th>Category</th>
+        <th>View</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each posts}}
+      <tr>
+        <td>{{id}}</td>
+        <td>{{user.firstName}} {{user.lastName}}</td>
+        <td>
+          <a href="/uploads/{{file}}"><img height="50" src="/uploads/{{file}}"/></a></td>
+        <td>{{title}}</td>
+        <td>{{status}}</td>
+        <td>{{allowComments}}</td>
+        <td>{{category.name}}</td>
+        <td><a class="btn"href="/post/{{id}}">View</a></td>
+        <td>{{generateDate date 'MMMM, DD YYYY'}}</td>
+        <td>
+          <form action="/admin/posts/delete/{{id}}?_method=DELETE" method="post">
+            <a href="/admin/posts/edit/{{id}}" class="btn btn-info">Edit</a>&nbsp
+            <button class="btn btn-danger" type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+</table>
